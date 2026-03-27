@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgentMaurice Viewer — Demo Embed</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #F9FAFB;
+      color: #1E1B4B;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: #1E1B4B;
+      margin-bottom: 12px;
+      font-size: 2rem;
+    }
+
+    .intro {
+      color: #666;
+      margin-bottom: 32px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .example {
+      margin: 32px 0;
+      padding: 24px;
+      background: white;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .example h2 {
+      font-size: 1.25rem;
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: #1E1B4B;
+    }
+
+    .example-description {
+      color: #666;
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    agent-maurice-viewer {
+      display: block;
+      border: 1px solid #E5E7EB;
+      border-radius: 4px;
+      min-height: 300px;
+      background: white;
+    }
+
+    .code-block {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 4px;
+      padding: 12px;
+      margin-top: 16px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.75rem;
+      overflow-x: auto;
+      color: #1E1B4B;
+      line-height: 1.4;
+    }
+
+    .footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #E5E7EB;
+      color: #666;
+      font-size: 0.875rem;
+      text-align: center;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #7C3AED;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #666;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: rgba(124, 58, 237, 0.1);
+      color: #7C3AED;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <h1>AgentMaurice Viewer — Embed Demo</h1>
+  <p class="intro">
+    Discover <strong>agent-maurice-viewer</strong>, an embeddable Web Component for integrating AgentMaurice into any static site. Each example below shows a different usage with theme customizations.
+  </p>
+
+  <div class="example">
+    <h2>Contact form — Default theme</h2>
+    <p class="example-description">
+      This example renders a contact form with AgentMaurice's default color palette (primary violet #7C3AED).
+    </p>
+    <agent-maurice-viewer
+      deployment-id="demo_deploy"
+      recipe-id="contact_form"
+      api-url="http://localhost:8080"
+      theme-primary="#7C3AED"
+      theme-radius="8px"
+    ></agent-maurice-viewer>
+    <div class="code-block">&lt;agent-maurice-viewer<br/>  deployment-id="demo_deploy"<br/>  recipe-id="contact_form"<br/>  api-url="http://localhost:8080"<br/>  theme-primary="#7C3AED"<br/>  theme-radius="8px"<br/>&gt;&lt;/agent-maurice-viewer&gt;</div>
+    <div class="tags">
+      <span class="tag">Deployment</span>
+      <span class="tag">Form</span>
+      <span class="tag">Contact</span>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2>Feedback form — Custom theme</h2>
+    <p class="example-description">
+      This example uses a green theme (#059669) with rounder corners (16px) for a more modern look.
+    </p>
+    <agent-maurice-viewer
+      deployment-id="demo_deploy"
+      recipe-id="feedback_form"
+      api-url="http://localhost:8080"
+      theme-primary="#059669"
+      theme-radius="16px"
+    ></agent-maurice-viewer>
+    <div class="code-block">&lt;agent-maurice-viewer<br/>  deployment-id="demo_deploy"<br/>  recipe-id="feedback_form"<br/>  api-url="http://localhost:8080"<br/>  theme-primary="#059669"<br/>  theme-radius="16px"<br/>&gt;&lt;/agent-maurice-viewer&gt;</div>
+    <div class="tags">
+      <span class="tag">Deployment</span>
+      <span class="tag">Feedback</span>
+      <span class="tag">Custom theme</span>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2>Form with initial state</h2>
+    <p class="example-description">
+      This form is initialized with seed data (initial state). Fields can be prefilled through the <code>seed-state</code> attribute.
+    </p>
+    <agent-maurice-viewer
+      deployment-id="demo_deploy"
+      recipe-id="profile_form"
+      api-url="http://localhost:8080"
+      theme-primary="#0891B2"
+      seed-state='{"username":"AgentMaurice","email":"info@agentmaurice.dev"}'
+    ></agent-maurice-viewer>
+    <div class="code-block">&lt;agent-maurice-viewer<br/>  deployment-id="demo_deploy"<br/>  recipe-id="profile_form"<br/>  api-url="http://localhost:8080"<br/>  theme-primary="#0891B2"<br/>  seed-state='{...}'<br/>&gt;&lt;/agent-maurice-viewer&gt;</div>
+    <div class="tags">
+      <span class="tag">Deployment</span>
+      <span class="tag">Initial state</span>
+      <span class="tag">Form</span>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2>Available attributes</h2>
+    <p class="example-description">
+      Here is the full list of attributes you can use to configure an <code>&lt;agent-maurice-viewer&gt;</code>.
+    </p>
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+      <thead>
+        <tr style="background-color: #F9FAFB; border-bottom: 1px solid #E5E7EB;">
+          <th style="padding: 12px; text-align: left; font-weight: 600;">Attribute</th>
+          <th style="padding: 12px; text-align: left; font-weight: 600;">Required</th>
+          <th style="padding: 12px; text-align: left; font-weight: 600;">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 12px; font-family: monospace; color: #7C3AED;">deployment-id</td>
+          <td style="padding: 12px; color: #DC2626; font-weight: 600;">Yes</td>
+          <td style="padding: 12px;">ID of the AgentMaurice deployment to load</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 12px; font-family: monospace; color: #7C3AED;">recipe-id</td>
+          <td style="padding: 12px; color: #DC2626; font-weight: 600;">Yes</td>
+          <td style="padding: 12px;">ID of the recipe (meta-recette) to execute</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 12px; font-family: monospace; color: #7C3AED;">api-url</td>
+          <td style="padding: 12px; color: #059669;">No</td>
+          <td style="padding: 12px;">AgentMaurice API URL (default: https://api.agentmaurice.dev)</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 12px; font-family: monospace; color: #7C3AED;">theme-primary</td>
+          <td style="padding: 12px; color: #059669;">No</td>
+          <td style="padding: 12px;">Primary color (for example: #7C3AED)</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 12px; font-family: monospace; color: #7C3AED;">theme-secondary</td>
+          <td style="padding: 12px; color: #059669;">No</td>
+          <td style="padding: 12px;">Secondary color (for example: #0891B2)</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 12px; font-family: monospace; color: #7C3AED;">theme-radius</td>
+          <td style="padding: 12px; color: #059669;">No</td>
+          <td style="padding: 12px;">Border radius (for example: 8px, 16px)</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 12px; font-family: monospace; color: #7C3AED;">theme-font-family</td>
+          <td style="padding: 12px; color: #059669;">No</td>
+          <td style="padding: 12px;">Custom font family</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px; font-family: monospace; color: #7C3AED;">seed-state</td>
+          <td style="padding: 12px; color: #059669;">No</td>
+          <td style="padding: 12px;">Initial JSON state (for example: '{\"key\":\"value\"}')</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <p>AgentMaurice Viewer v0.1.0</p>
+    <p style="margin-top: 8px; font-size: 0.75rem;">For more information, refer to the full documentation.</p>
+  </div>
+
+  <script src="../dist/viewer.js"></script>
+</body>
+</html>

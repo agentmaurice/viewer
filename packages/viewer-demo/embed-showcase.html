@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viewer Demo - Embed sans React</title>
+  <script type="module">
+    import '@agent-maurice/viewer-embed'
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f6fb;
+      --panel: #ffffff;
+      --border: #d8dfec;
+      --text: #162033;
+      --muted: #5f6b84;
+      --accent: #1d4ed8;
+      --accent-soft: rgba(29, 78, 216, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #eef3ff 0%, var(--bg) 28%, #ffffff 100%);
+      color: var(--text);
+    }
+
+    main {
+      width: min(1240px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 40px 0 64px;
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 3vw, 3.2rem);
+      line-height: 1.05;
+    }
+
+    .lede {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .hero-grid,
+    .embed-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1.3fr 0.7fr;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 8px var(--accent-soft);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fbfcff;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .code {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 14px;
+      background: #101827;
+      color: #d5e1ff;
+      overflow-x: auto;
+      font-family: "SFMono-Regular", Menlo, monospace;
+      font-size: 0.84rem;
+      line-height: 1.55;
+      white-space: pre;
+    }
+
+    .checklist {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .embed-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+    }
+
+    .embed-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+    }
+
+    .embed-card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    agent-maurice-viewer {
+      display: block;
+      width: 100%;
+      min-height: 560px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .embed-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    @media (max-width: 940px) {
+      .hero-grid,
+      .embed-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Viewer Embed Demo</div>
+      <h1>Three OpenUI mini-apps embedded in a static HTML page</h1>
+      <p class="lede">
+        This page shows how to use <code>@agent-maurice/viewer-embed</code> without a React application.
+        The component is imported directly in the <code>&lt;head&gt;</code>, then several
+        <code>&lt;agent-maurice-viewer&gt;</code> elements are placed in the HTML with a <code>mock-scenario</code>.
+      </p>
+    </header>
+
+    <section class="hero-grid">
+      <article class="panel">
+        <div class="eyebrow">Import JS</div>
+        <div class="code" id="code">&lt;script type="module"&gt;
+  import '@agent-maurice/viewer-embed'
+&lt;/script&gt;
+
+&lt;agent-maurice-viewer
+  mock-scenario="sales-cockpit"
+  theme-primary="#1d4ed8"
+  theme-radius="18px"
+&gt;&lt;/agent-maurice-viewer&gt;</div>
+        <div class="stats">
+          <div class="stat">
+            <strong>0</strong>
+            <span>React components to write</span>
+          </div>
+          <div class="stat">
+            <strong>3</strong>
+            <span>mocked mini-apps on the page</span>
+          </div>
+          <div class="stat">
+            <strong>1</strong>
+            <span>JS import in the header</span>
+          </div>
+        </div>
+      </article>
+
+      <aside class="panel">
+        <div class="eyebrow">What it shows</div>
+        <ul class="checklist">
+          <li>Several embeds side by side in a simple web page.</li>
+          <li>A local stub to test the viewer without a backend or Supabase.</li>
+          <li>Different themes per instance through HTML attributes.</li>
+          <li>A simple base that can later replace the mock with a real slug or deployment.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="embed-grid">
+      <article class="panel embed-card">
+        <div class="tag-row">
+          <span class="tag">sales-cockpit</span>
+          <span class="tag">KPI</span>
+          <span class="tag">Table</span>
+        </div>
+        <h2>Sales cockpit</h2>
+        <p>Control-oriented example with segments, focus areas, and a deals table.</p>
+        <agent-maurice-viewer
+          mock-scenario="sales-cockpit"
+          theme-primary="#1d4ed8"
+          theme-secondary="#eff6ff"
+          theme-radius="18px"
+        ></agent-maurice-viewer>
+      </article>
+
+      <article class="panel embed-card">
+        <div class="tag-row">
+          <span class="tag">ops-review</span>
+          <span class="tag">Review</span>
+          <span class="tag">Form</span>
+        </div>
+        <h2>Operations review</h2>
+        <p>More workspace-oriented example with work queues, priorities, and demo annotation.</p>
+        <agent-maurice-viewer
+          mock-scenario="ops-review"
+          theme-primary="#0f766e"
+          theme-secondary="#ecfeff"
+          theme-radius="22px"
+        ></agent-maurice-viewer>
+      </article>
+
+      <article class="panel embed-card wide">
+        <div class="tag-row">
+          <span class="tag">support-center</span>
+          <span class="tag">Monitoring</span>
+          <span class="tag">Multi-embed</span>
+        </div>
+        <h2>Support control center</h2>
+        <p>Monitoring example with alerts and a more critical tone, useful for demonstrating a supervision embed in a static page.</p>
+        <agent-maurice-viewer
+          mock-scenario="support-center"
+          theme-primary="#b91c1c"
+          theme-secondary="#fef2f2"
+          theme-radius="16px"
+        ></agent-maurice-viewer>
+      </article>
+    </section>
+
+    <p class="footer-note">
+      For real backend integration, the viewer now goes through the <strong>recipe-server</strong>.
+      This page intentionally stays 100% local to demonstrate embedding without external dependencies.
+      Back to the React gallery: <a href="/">viewer-demo</a>.
+    </p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "@agent-maurice/viewer-embed",
+  "version": "0.1.0",
+  "description": "Embeddable Web Component for integrating AgentMaurice into any site",
+  "main": "dist/viewer.js",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@agent-maurice/viewer-core": "*",
+    "@agent-maurice/viewer-web": "*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^5.4.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  },
+  "files": ["dist"],
+  "license": "UNLICENSED"
+}

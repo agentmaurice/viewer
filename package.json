@@ -1,0 +1,5 @@
+{
+  "name": "agent-maurice-viewer",
+  "private": true,
+  "workspaces": ["packages/*"]
+}
