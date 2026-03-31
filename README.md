@@ -110,6 +110,39 @@ So this repository should be treated as the recommended client starter for
 viewer-centric integrations, with final auth validation done against the target
 AgentMaurice deployment.
 
+## Form submission contract
+
+Mini-app forms are submitted through the app event endpoint, not through a
+generic form endpoint.
+
+The contract is:
+
+- `POST /app/instances/{appInstanceId}/events/{eventId}`
+- `eventId` must come from the UI contract
+- for a `form_link`, use `submit_event` when it is present
+- only fall back to `form_submit` when no explicit `submit_event` is provided
+- send user-entered values in `form_data`
+- keep UI context such as `form_id` in `payload`
+
+Example:
+
+```json
+{
+  "payload": {
+    "form_id": "main_form"
+  },
+  "form_data": {
+    "cahier_des_charges": "...",
+    "document_reponse": "..."
+  },
+  "expected_state_version": 1
+}
+```
+
+This matters because many recipes declare named events such as
+`submit_main_form`. Hardcoding `form_submit` in the renderer can make the
+backend reject the request with `404 app event not found`.
+
 ## Repository role
 
 This repository is intended to serve as a base for a public or private client

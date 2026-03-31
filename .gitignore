@@ -1,4 +1,7 @@
 node_modules/
 dist/
+packages/*/dist/
+.env.local
+packages/*/.env.local
 *.log
 .DS_Store

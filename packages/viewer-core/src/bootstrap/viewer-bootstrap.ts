@@ -59,7 +59,7 @@ export class ViewerBootstrap {
       }
 
       authAdapter = authAdapter ?? resolveAuthAdapter(bootstrapResponse);
-      if (!config.authAdapter) {
+      if (!config.authAdapter && authAdapter) {
         await authAdapter.authenticate();
       }
 
@@ -135,11 +135,15 @@ export class ViewerBootstrap {
   }
 }
 
-function resolveAuthAdapter(bootstrap: ViewerBootstrapResponse): AuthAdapter {
+function resolveAuthAdapter(
+  bootstrap: ViewerBootstrapResponse,
+): AuthAdapter | undefined {
   const authMode = bootstrap.config.auth_mode;
   const providerConfig = bootstrap.config.auth_provider_config ?? {};
 
   switch (authMode) {
+    case "none":
+      return undefined;
     case "api_key": {
       const token =
         providerConfig.api_key ??

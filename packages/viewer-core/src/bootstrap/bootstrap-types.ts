@@ -3,6 +3,7 @@ import type { ViewerState } from "../state/types";
 import type { AppActionBinding } from "../types/events";
 
 export type ViewerAuthMode =
+  | "none"
   | "api_key"
   | "firebase"
   | "supabase"

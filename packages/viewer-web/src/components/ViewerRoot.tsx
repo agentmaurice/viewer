@@ -20,7 +20,10 @@ export function ViewerRoot({
   className,
 }: ViewerRootProps) {
   const [state, setState] = useState<ViewerState | null>(null);
-  const [activeForm, setActiveForm] = useState<string | null>(null);
+  const [activeForm, setActiveForm] = useState<{
+    formId: string;
+    submitEvent?: string;
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -49,15 +52,16 @@ export function ViewerRoot({
   };
 
   const handleOpenForm = (formId: string, submitEvent?: string) => {
-    setActiveForm(formId);
+    setActiveForm({ formId, submitEvent });
   };
 
   const handleFormSubmit = (data: Record<string, unknown>) => {
     try {
-      stateMachine.dispatchEvent("form_submit", {
-        form_id: activeForm,
+      stateMachine.dispatchEvent(
+        activeForm?.submitEvent || "form_submit",
+        activeForm ? { form_id: activeForm.formId } : {},
         data,
-      });
+      );
       setActiveForm(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Form submission failed");
@@ -97,11 +101,11 @@ export function ViewerRoot({
 
         {activeForm &&
           state.runtime?.forms &&
-          state.runtime.forms[activeForm] && (
+          state.runtime.forms[activeForm.formId] && (
             <div className="am-form-overlay">
               <div className="am-form-modal">
                 <FormRenderer
-                  form={state.runtime.forms[activeForm]}
+                  form={state.runtime.forms[activeForm.formId]}
                   onSubmit={handleFormSubmit}
                   onCancel={handleFormCancel}
                 />

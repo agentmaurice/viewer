@@ -206,4 +206,27 @@ describe("ViewerBootstrap", () => {
     ).resolves.toBeUndefined();
     expect(instance.state.runtime?.state_version).toBe(2);
   });
+
+  it("allows bootstrap without authAdapter when auth_mode is none", async () => {
+    vi.mocked(fetchBootstrapConfig).mockResolvedValue({
+      ...mockBootstrapResponse,
+      config: {
+        ...mockBootstrapResponse.config,
+        auth_mode: "none",
+      },
+    });
+
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(mockRuntimePayload),
+    });
+
+    const instance = await ViewerBootstrap.init({
+      deploymentId: "dep_123",
+      apiBaseUrl: "https://api.test.com",
+      fetch: mockFetch,
+    });
+
+    expect(instance.state.phase).toBe("ready");
+  });
 });
